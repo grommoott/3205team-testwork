@@ -38,7 +38,6 @@ const InteractionPanel: FC = () => {
         }
 
         const wrapper = ref.current as HTMLDivElement
-        console.log(wrapper.scrollHeight)
         setWrappersContainerHeight(wrapper.scrollHeight)
     }, [setWrappersContainerHeight, wrapperRefs])
 
