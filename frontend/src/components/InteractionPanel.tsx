@@ -70,7 +70,7 @@ const InteractionPanel: FC = () => {
 
             <InteractionPanelHeightContext value={updateHeight}>
                 <div
-                    className="relative w-[30rem] duration-500"
+                    className="relative w-[30rem] duration-300"
                     style={{ height: wrappersContainerHeight }}
                 >
                     <CreateUrl
