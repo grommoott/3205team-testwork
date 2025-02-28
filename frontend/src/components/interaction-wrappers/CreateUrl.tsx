@@ -101,8 +101,14 @@ const CreateUrl = forwardRef<HTMLDivElement, InteractionWrapperProps>(
                         className="rounded-[0_1rem_1rem_0] px-2 bg-blue-100 hover:bg-blue-200 active:bg-blue-300 focus-visible:bg-blue-200 duration-100 text-black/50 outline-none cursor-pointer"
                         onClick={() => {
                             if (shortenedUrl) {
-                                navigator.clipboard.writeText(shortenedUrl)
-                                toast.info("Скопировано")
+                                if (window.isSecureContext) {
+                                    navigator.clipboard.writeText(shortenedUrl)
+                                    toast.info("Скопировано")
+                                } else {
+                                    toast.warning(
+                                        "Эта кнопка работает только если приложение запущено локально или используется https(",
+                                    )
+                                }
                             }
                         }}
                     >
