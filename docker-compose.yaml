@@ -1,0 +1,45 @@
+services:
+  backend:
+    container_name: 3205team-testwork-backend
+    image: backend
+    build:
+      context: ./backend
+    environment:
+      DB_HOST: 3205team-testwork-db
+      DB_PORT: 5432
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_DATABASE: ${DB_DATABASE}
+      BACKEND_BASE_URL: ${BACKEND_BASE_URL}
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+
+  frontend:
+    container_name: 3205team-testwork-frontend
+    image: frontend
+    build:
+      context: ./frontend
+    ports:
+      - "4173:4173"
+
+  db:
+    container_name: 3205team-testwork-db
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - db-data:${PWD}/db_data/:/var/lib/postgresql/data/
+
+volumes:
+   db-data:

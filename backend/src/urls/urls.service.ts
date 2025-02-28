@@ -55,6 +55,11 @@ export class UrlsService {
             throw new NotFoundException()
         }
 
+        if (url.expiresAt && url.expiresAt.getTime() < new Date().getTime()) {
+            await this.delete(url.shortUrl)
+            throw new NotFoundException()
+        }
+
         return {
             clickCount: url.clickCount,
             createdAt: url.createdAt,
@@ -87,6 +92,8 @@ export class UrlsService {
         url.originalUrl = createUrlDto.originalUrl
         url.shortUrl = createUrlDto.shortUrl || (await this.getShortUrl())
         url.expiresAt = createUrlDto.expiresAt || null
+        url.clickCount = 0
+        url.createdAt = new Date()
 
         await this.urlsRepository.save(url)
 

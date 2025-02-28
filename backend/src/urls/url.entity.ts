@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
+import { RedirectInfo } from "src/analytics/redirectInfo.entity"
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
 
 @Entity()
 export class Url {
@@ -19,4 +20,7 @@ export class Url {
 
     @Column({ type: "timestamptz", nullable: true })
     expiresAt: Date | null
+
+    @OneToMany(() => RedirectInfo, (redirectInfo) => redirectInfo.url)
+    redirectInfos: RedirectInfo[]
 }
