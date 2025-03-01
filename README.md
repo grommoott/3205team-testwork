@@ -13,7 +13,7 @@
 
 ## Документация по API
 
-#### `POST /shorten`
+### `POST /shorten`
 Создаёт новый укороченный url
 
 Тело запроса
@@ -34,13 +34,13 @@
 Ошибки:
  - `400: Url with such shortUrl is already exists`
 
-#### `GET /:shortUrl`
+### `GET /:shortUrl`
 Переадресовывает на url, который был сокращён, и получил `shortUrl` равным `:shortUrl`
 
 Ошибки:
  - `404`: Если не существует укороченной ссылки с `shortUrl` равным `:shortUrl`
 
-#### `GET /info/:shortUrl`
+### `GET /info/:shortUrl`
 Возвращает базовую информацию о ссылке
 
 Тело ответа
@@ -55,13 +55,13 @@
 Ошибки:
  - `404`: Если не существует укороченной ссылки с `shortUrl` равным `:shortUrl` 
 
-#### `DELETE /delete/:shortUrl`
+### `DELETE /delete/:shortUrl`
 Удаляет сокращённую ссылку с `shortUrl` равным `:shortUrl`
 
 Ошибки:
  - `404`: Если не существует укороченной ссылки с `shortUrl` равным `:shortUrl`
 
-#### `GET /analytics/:shortUrl`
+### `GET /analytics/:shortUrl`
 Возвращает подробную информацию о ссылке
 
 Тело ответа
